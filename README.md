@@ -1,8 +1,6 @@
 ## Gestiona Project
 
-Este proyecto se engloba en el marco de una arquitectura de microservicios sobre un bus ServiceMix, y consiste en la
-implementación de un web-service securizado por certificado de aplicación, que levanta un end-point para recibir soli-
-citudes, enruta la petición al servicio de acceso al datasource, formatea la respuesta, y devuelve el resultado.
+Este proyecto se engloba en el marco de una arquitectura de microservicios sobre un bus ServiceMix, y consiste en la implementación de un web-service securizado por certificado de aplicación, que levanta un end-point para recibir solicitudes, enruta la petición al servicio de acceso al datasource, formatea la respuesta, y devuelve el resultado.
 
 ## Bibliography
 
