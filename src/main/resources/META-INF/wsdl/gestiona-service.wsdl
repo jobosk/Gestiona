@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<wsdl:definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:impl="http://intermediacion.redsara.es/xml-schemas"
+                  xmlns:ns1="http://intermediacion.redsara.es/scsp/esquemas/V3/peticion"
+                  xmlns:ns2="http://intermediacion.redsara.es/scsp/esquemas/V3/respuesta"
+                  xmlns:ns3="http://intermediacion.redsara.es/scsp/esquemas/V3/soapfaultatributos"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://intermediacion.redsara.es/xml-schemas"
+                  name="GestionaService">
+
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://intermediacion.redsara.es/xml-schemas">
+            <xsd:import namespace="http://intermediacion.redsara.es/scsp/esquemas/V3/peticion"
+                        schemaLocation="peticion.xsd"/>
+            <xsd:import namespace="http://intermediacion.redsara.es/scsp/esquemas/V3/respuesta"
+                        schemaLocation="respuesta.xsd"/>
+            <xsd:import namespace="http://intermediacion.redsara.es/scsp/esquemas/V3/soapfaultatributos"
+                        schemaLocation="soapfaultatributos.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="PeticionReq">
+        <wsdl:part element="ns1:Peticion" name="peticion"/>
+    </wsdl:message>
+    <wsdl:message name="PeticionRes">
+        <wsdl:part element="ns2:Respuesta" name="respuesta"/>
+    </wsdl:message>
+
+    <wsdl:message name="faultGestionaMessage">
+        <wsdl:part name="fault" element="ns3:Atributos"/>
+    </wsdl:message>
+
+    <wsdl:portType name="TestService">
+        <wsdl:operation name="testOperation">
+            <wsdl:input message="impl:PeticionReq" name="peticion"/>
+            <wsdl:output message="impl:PeticionRes" name="respuesta"/>
+            <wsdl:fault message="impl:faultGestionaMessage" name="FaultGestiona"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:portType name="GetDataService">
+        <wsdl:operation name="getDataOperation">
+            <wsdl:input message="impl:PeticionReq" name="peticion"/>
+            <wsdl:output message="impl:PeticionRes" name="respuesta"/>
+            <wsdl:fault message="impl:faultGestionaMessage" name="FaultGestiona"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="TestServiceSOAP" type="impl:TestService">
+        <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="testOperation">
+            <wsdlsoap:operation soapAction="GestionaInsertarXML" style="document"/>
+            <wsdl:input>
+                <wsdlsoap:body parts="peticion" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body parts="respuesta" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="FaultGestiona">
+                <wsdlsoap:fault name="FaultGestiona" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:binding name="GetDataServiceSOAP" type="impl:GetDataService">
+        <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getDataOperation">
+            <wsdlsoap:operation soapAction="GestionaInsertarXML" style="document"/>
+            <wsdl:input>
+                <wsdlsoap:body parts="peticion" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body parts="respuesta" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="FaultGestiona">
+                <wsdlsoap:fault name="FaultGestiona" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="TestService">
+        <wsdl:port binding="impl:TestServiceSOAP" name="TestServiceSOAP">
+            <wsdlsoap:address location="http://localhost:8080/WSGestiona/TestService"/>
+        </wsdl:port>
+
+    </wsdl:service>
+
+    <wsdl:service name="GetDataService">
+        <wsdl:port binding="impl:GetDataServiceSOAP" name="GestionaServiceSOAP">
+            <wsdlsoap:address location="http://localhost:8080/WSGestiona/GestionaService"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="response">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="informe_control" type="informe_control" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="informe_control">
+        <xs:sequence>
+            <xs:element name="titular" type="titular"/>
+            <xs:element name="recinto" type="recinto"/>
+            <xs:element name="proceso_control" type="proceso_control"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="titular">
+        <xs:sequence>
+            <xs:element name="op_razon_social" type="xs:string"/>
+            <xs:element name="op_nif" type="xs:string"/>
+            <xs:element name="op_fecha_notificacion" type="xs:date"/>
+            <xs:element name="op_fecha_certificacion" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="recinto">
+        <xs:sequence>
+            <xs:element name="cod_provincia" type="xs:string"/>
+            <xs:element name="cod_muncipio" type="xs:string"/>
+            <xs:element name="poligono" type="xs:string"/>
+            <xs:element name="parcela" type="xs:string"/>
+            <xs:element name="recinto" type="xs:string"/>
+            <xs:element name="subrecinto" type="xs:string"/>
+            <xs:element name="superficie_sigpac_ha" type="xs:string"/>
+            <xs:element name="superficiecertificadaha" type="xs:string"/>
+            <xs:element name="cod_capa" type="xs:string"/>
+            <xs:element name="doblado" type="xs:string"/>
+            <xs:element name="regadio" type="xs:string"/>
+            <xs:element name="iniciopraceco" type="xs:date"/>
+            <xs:element name="fechabaja" type="xs:date" minOccurs="0"/>
+            <xs:element name="estadoparcela" type="xs:string"/>
+            <xs:element name="denparcela" type="xs:string"/>
+            <xs:element name="campana" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="proceso_control">
+        <xs:sequence>
+            <xs:element name="ult_visita" type="xs:string"/>
+            <xs:element name="estado_control" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
